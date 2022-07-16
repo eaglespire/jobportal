@@ -11,7 +11,11 @@
             <a href="/about" class="nav-item nav-link">About</a>
             <a href="/contact" class="nav-item nav-link">Contact</a>
             <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Account</a>
+                @guest
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Account</a>
+                @else
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">{{ auth()->user()->firstname }}</a>
+                @endguest
                 <div class="dropdown-menu rounded-0 m-0">
                     @auth
                         <a href="/home" class="dropdown-item">Profile</a>
