@@ -14,7 +14,7 @@
                 @guest
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Account</a>
                 @else
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">{{ auth()->user()->firstname }}</a>
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">{{ auth()->user()->name }}</a>
                 @endguest
                 <div class="dropdown-menu rounded-0 m-0">
                     @auth
