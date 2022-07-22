@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
 use Illuminate\Http\Request;
@@ -31,6 +32,8 @@ Route::get('/test', function (Request $request){
    ];
 return view('test', compact('users'));
 });
+
+Route::resource('users', UsersController::class);
 
 /*
  * auth
