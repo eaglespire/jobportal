@@ -4,6 +4,7 @@ use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
 use Illuminate\Http\Request;
+use App\Http\Controllers\PostsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,11 @@ return view('test', compact('users'));
 });
 
 Route::resource('users', UsersController::class);
+Route::get('/posts/create',[ PostsController::class,'create' ])->name('post.create');
+Route::post('/posts/store', [ PostsController::class,'store' ])->name('post.store');
+Route::get('/posts/{id}/edit', [ PostsController::class,'edit' ])->name('post.edit');
+Route::get('/posts', [ PostsController::class,'index' ])->name('post.all');
+#Route::get('/posts/edit/{id}')
 
 /*
  * auth
