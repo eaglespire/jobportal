@@ -1,10 +1,10 @@
 <?php
-
-use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
 use Illuminate\Http\Request;
-use App\Http\Controllers\PostsController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\EmployerController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,33 +17,28 @@ use App\Http\Controllers\PostsController;
 |
 */
 
-Route::get('/', [ PagesController::class, 'landing' ] )->name('landing');
-Route::get('about', [ PagesController::class,'about' ])->name('about');
-Route::get('contact', [ PagesController::class,'contact' ])->name('contact');
-
+Route::controller(PagesController::class)->group(function (){
+    Route::get('/', 'landing' )->name('landing');
+    Route::get('about', 'about')->name('about');
+    Route::get('contact', 'contact')->name('contact');
+});
+Route::controller(HomeController::class)->group(function (){
+    Route::get('home','index')->name('home') ;
+});
+//Route prefix
+Route::controller(EmployerController::class)->prefix('employer')->name('employer.')->group(function (){
+   Route::get('/','dashboard')->name('dashboard');
+});
+Route::controller(AdminController::class)->prefix('admin')->name('admin.')->group(function (){
+    Route::get('/','dashboard')->name('dashboard');
+});
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//We protect routes in web applications using middleware
+//laravel uses the auth middleware to protect users only page
+      //->middleware()
 
-Route::get('/test', function (Request $request){
-   $users = [
-       array('name'=>'Emeka','age'=>22),
-       array('name'=>'John','age'=>23),
-       array('name'=>'Marvelous','age'=>24),
-   ];
-return view('test', compact('users'));
-});
 
-Route::resource('users', UsersController::class);
-Route::get('/posts/create',[ PostsController::class,'create' ])->name('post.create');
-Route::post('/posts/store', [ PostsController::class,'store' ])->name('post.store');
-Route::get('/posts/{id}/edit', [ PostsController::class,'edit' ])->name('post.edit');
-Route::get('/posts', [ PostsController::class,'index' ])->name('post.all');
-#Route::get('/posts/edit/{id}')
 
-/*
- * auth
- * guest
- */
 
 

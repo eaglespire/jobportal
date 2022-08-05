@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -31,6 +32,8 @@ class RegisterController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
+
+
     /**
      * Create a new controller instance.
      *
@@ -40,6 +43,21 @@ class RegisterController extends Controller
     {
         $this->middleware('guest');
     }
+    public function redirectPath()
+    {
+         if (auth()->user()->role == 'employer'){
+            return '/employer';
+         }
+        if (auth()->user()->role == 'admin'){
+            return '/admin';
+        }
+         //auth()->user()->id
+        //auth()->id()
+
+             //The auth()->user() returns our authenticated user
+    }
+
+
 
     /**
      * Get a validator for an incoming registration request.

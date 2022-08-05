@@ -17,13 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->enum('role',['employer','user','admin']);
-            //$table->string('middlename')->nullable();
-            //$table->string('lastname');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-           // $table->foreign('id')->references('role')
-            //$table->foreignId('role_id')->constrained()->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->rememberToken();
             $table->timestamps();
         });
