@@ -40,15 +40,27 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-    public function redirectPath()
+//    public function redirectPath()
+//    {
+//        if (auth()->user()->role == 'employer'){
+//            return '/employer';
+//        }
+//        elseif (auth()->user()->role == 'admin'){
+//            return '/admin';
+//        }
+//        else {
+//            return '/home';
+//        }
+//    }
+
+    protected function authenticated(Request $request, $user)
     {
-        if (auth()->user()->role == 'employer'){
-            return '/employer';
+        if ($user->role == 'admin'){
+            return redirect()->to(RouteServiceProvider::ADMIN);
+        } elseif ($user->role == 'employer'){
+            return redirect()->to(RouteServiceProvider::EMPLOYER);
+        } else{
+            return redirect()->to(RouteServiceProvider::HOME);
         }
-        if (auth()->user()->role == 'admin'){
-            return '/admin';
-        }
-
     }
-
 }

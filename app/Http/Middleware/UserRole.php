@@ -19,6 +19,6 @@ class UserRole
         if (auth()->user()->role == 'user'){
            return $next($request);
         }
-        return redirect()->to('/');
+        return back();
     }
 }

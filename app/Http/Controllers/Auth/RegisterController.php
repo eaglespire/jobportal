@@ -43,21 +43,17 @@ class RegisterController extends Controller
     {
         $this->middleware('guest');
     }
-    public function redirectPath()
+
+    protected function authenticated(Request $request, $user)
     {
-         if (auth()->user()->role == 'employer'){
-            return '/employer';
-         }
-        if (auth()->user()->role == 'admin'){
-            return '/admin';
-        }
-         //auth()->user()->id
-        //auth()->id()
-
-             //The auth()->user() returns our authenticated user
+       if ($user->role == 'admin'){
+           return redirect()->to(RouteServiceProvider::ADMIN);
+       } elseif ($user->role == 'employer'){
+           return redirect()->to(RouteServiceProvider::EMPLOYER);
+       } else{
+           return redirect()->to(RouteServiceProvider::HOME);
+       }
     }
-
-
 
     /**
      * Get a validator for an incoming registration request.

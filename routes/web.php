@@ -28,6 +28,7 @@ Route::controller(HomeController::class)->group(function (){
 //Route prefix
 Route::controller(EmployerController::class)->prefix('employer')->name('employer.')->group(function (){
    Route::get('/','dashboard')->name('dashboard');
+   Route::get('/profile','profile')->name('profile');
 });
 Route::controller(AdminController::class)->prefix('admin')->name('admin.')->group(function (){
     Route::get('/','dashboard')->name('dashboard');

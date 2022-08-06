@@ -19,7 +19,7 @@ class EmployerRole
         if (auth()->user()->role == 'employer'){
             return $next($request);
         }
-        return redirect()->to('/');
+        return back();
         //return $next($request);
     }
 }
